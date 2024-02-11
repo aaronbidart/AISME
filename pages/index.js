@@ -3,14 +3,26 @@ import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 
+import { db } from '../lib/firebase'; // adjust the path as necessary
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+
+
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const handleEmailSubmit = async (event) => {
     event.preventDefault();
     const email = event.target.email.value;
-    // Here you'll later add the code to save the email to Firebase
-    console.log('Email to save:', email);
+    try {
+      await addDoc(collection(db, 'emails'), {
+        email: email,
+        createdAt: serverTimestamp()
+      });
+      console.log('Email saved to Firestore!');
+    } catch (error) {
+      console.error('Error writing document: ', error);
+    }
+    
     // Reset the input field after submission
     event.target.email.value = '';
   };
