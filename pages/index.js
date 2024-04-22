@@ -49,7 +49,7 @@ export default function Home() {
         <h1 className={styles.title}>
         The not free AI SME
         </h1>
-        <p className={styles.description}>Outsource your decision making for a 1 time fee of $199.
+        <p className={styles.description}>Outsource your decision making for a 1 time fee of $499.
         </p>
         <form onSubmit={handleEmailSubmit} className={styles.emailForm}>
           <input
